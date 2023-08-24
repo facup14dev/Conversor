@@ -4,61 +4,115 @@
     font-family: 'Raleway', sans-serif;
 }
 
-h1 {
-    font-size: 50px;
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color:rgb(74, 119, 77) ;
+  font-size: 20px;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color:rgb(74, 119, 77) ;
-    font-size: 20px;
-  }
+.text{
+  font-size: 70px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 10px 0px 5px 0px;
+}
 
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 50px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.1);
-    background-color: whitesmoke;
-  }
+.animation{
+animation: typewriter 3s steps(15) 1s 1 both;
+}
 
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: whitesmoke;
+@keyframes typewriter {
+  from {
+    width: 0;
   }
-
-  input[type="radio"] {
-    cursor: pointer;
+  to {
+    width: 680px;
   }
+}
 
-  input[type="number"] {
-    width: 70%;
-    height: 25px;
-    text-align: center;
-    font-size: 20px;
-  }
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 50px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.1);
+  background-color: whitesmoke;
+}
 
-  input[type="button"] {
-    width: 50%;
-    background-color:rgb(74, 119, 77) ;
-    color: white;
-    box-shadow: 5px 5px 6px white;
-    cursor:pointer;
-    font-size: 15px;
-  }
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: whitesmoke;
+}
+
+form p {
+  margin-bottom: 15px;
+}
+
+input[type="radio"] {
+  cursor: pointer;
+}
+
+input[type="number"] {
+  width: 70%;
+  height: 25px;
+  text-align: center;
+  font-size: 20px;
+}
+
+input[type="button"] {
+  width: 40%;
+  background-color:rgb(74, 119, 77);
+  color: white;
+  box-shadow: 5px 5px 6px white;
+  font-size: 15px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  font-weight: bold;
+}
+
+input[type="radio"], input[type="number"], input[type="button"] {
+  margin: 5px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+li {
+    margin-bottom: 10px;
+}
 
 
-  input[type="radio"], input[type="number"], input[type="button"] {
-    margin: 5px;
-  }
+#filtro {
+  padding: 10px 40px 10px 10px;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 16px;
+  outline: none;
+  width: 60%; 
+}
+
+#filtro::placeholder {
+  color: black;
+  text-align: center;
+}
+
+#fecha {
+  font-size: 15px;
+  margin-bottom: 0;
+}

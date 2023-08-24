@@ -13,20 +13,31 @@
 </head>
 <body>
 
-    <h1>Conversor de Divisas</h1>
+    <h1 class="text animation">Conversor de Divisas</h1>
 
     <main>
 
         <form action="">
             <p>Seleccionar moneda a convertir</p>
-            <input type="radio" name="cambio" id="uno">Dolar ( u$d )
-            <input type="radio" name="cambio" id="dos">Euro (€)
-            <p>Ingresar monto en pesos a convertir </p>
+            <input type="radio" name="cambio" id="uno">Dolar ( U$D )
+            <input type="radio" name="cambio" id="dos">Euro ( € )
+            <input type="radio" name="cambio" id="tres">Real ( R$ )
+            <input type="radio" name="cambio" id="cuatro">Peso Chileno ( $ )
+            <p>Ingresar monto en pesos argentinos a convertir </p>
             <input type="number" id="valor" min="1" max="999999999" placeholder="$">
-            <input type="button" id="convertor" value="Convertir" onclick="cotizar()">
-            <p>Cantidad de conversiones esta sesion: <span id="contador">0</span> </p>
+            <input type="button" class="boton boton-secundario" id="convertor" value="Convertir" onclick="cotizar()">
         </form>
 
+
+        <h2>Tasas de Cambio</h1>
+
+        <input type="text" id="filtro" placeholder="Buscar moneda">
+        <ul id="tasasDeCambio">
+        </ul>
+
+
+        <p>Cantidad de conversiones esta sesión: <span id="contador">0</span> </p>
+        <p id="fecha"></p>
     </main>
 
     <script src="/js/script.js" async></script>
