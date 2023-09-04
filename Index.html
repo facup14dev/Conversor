@@ -11,35 +11,73 @@
     <link rel="shortcut icon" href="/images/aaa.ico" type="image/x-icon">
 
 </head>
+
 <body>
 
     <h1 class="text animation">Conversor de Divisas</h1>
 
     <main>
+        <div class="container monedas">
 
-        <form action="">
-            <p>Seleccionar moneda a convertir</p>
-            <input type="radio" name="cambio" id="uno">Dolar ( U$D )
-            <input type="radio" name="cambio" id="dos">Euro ( € )
-            <input type="radio" name="cambio" id="tres">Real ( R$ )
-            <input type="radio" name="cambio" id="cuatro">Peso Chileno ( $ )
-            <p>Ingresar monto en pesos argentinos a convertir </p>
-            <input type="number" id="valor" min="1" max="999999999" placeholder="$">
-            <input type="button" class="boton boton-secundario" id="convertor" value="Convertir" onclick="cotizar()">
-        </form>
+            <h2>Tasas de Cambio</h1>
+            <hr>
+
+            <input type="text" id="filtro" placeholder="Buscar moneda">
+            <ul id="tasasDeCambio"></ul>
+
+        </div>
+
+        <div class="container conversor">
+
+            <form action="">
+                <h1>Seleccionar moneda a convertir</h3>
+
+                <input type="radio" name="cambio" id="uno"><strong>Dolar ( U$D )</strong>
+                <input type="radio" name="cambio" id="dos"><strong>Euro ( € )</strong>
+                <input type="radio" name="cambio" id="tres"><strong>Real ( R$ )</strong>
+                <input type="radio" name="cambio" id="cuatro"><strong>Peso Chileno ( $ )</strong>
+
+                <p>Ingresar monto en pesos argentinos a convertir </p>
+
+                <input type="number" id="valor" min="1" max="999999999" placeholder="$" >
+                <input type="button" class="boton-convertir" id="convertor" value="Convertir" onclick="cotizar()">
+
+            </form>
+
+            <hr>
+
+            <div class="card"></div>
+
+        </div>
+
+        <div class="container historial">
+                <div id="historial">
+                    <h2>Historial de Conversiones</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Monto</th>
+                                <th>Resultado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historialTabla">
+                            <!-- Aquí se generará el contenido del historial -->
+                        </tbody>
+                    </table>
+                    <button onclick="borrarHistorial()">Borrar Historial</button>
+                </div>
+            <hr>
+        </div>
 
 
-        <h2>Tasas de Cambio</h1>
-
-        <input type="text" id="filtro" placeholder="Buscar moneda">
-        <ul id="tasasDeCambio">
-        </ul>
-
-
-        <p>Cantidad de conversiones esta sesión: <strong id="contador">0</strong> </p>
-        <small id="fecha"></small>
     </main>
 
-    <script src="/js/script.js" defer></script>
+    <footer>
+        <p>Cantidad de conversiones esta sesión: <strong id="contador">0</strong> </p>
+        <small id="fecha"></small>
+    </footer>
+
+<script src="/js/script.js" defer></script>
 </body>
 </html>

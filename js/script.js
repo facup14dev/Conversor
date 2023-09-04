@@ -46,12 +46,12 @@ boton.addEventListener('click', () => {
 });
 
 
-//Array de las monedas
+//Array de objetos de las monedas
 const tasasDeCambio = [
     { moneda: "USD", tasaCompra: 715, tasaVenta: 725 },
     { moneda: "EUR", tasaCompra: 788, tasaVenta: 799 },
-    { moneda: "BRL", tasaCompra: 71.88, tasaVenta: 75.85 },
-    { moneda: "CLP", tasaCompra: 0.41, tasaVenta: 0.60 },
+    { moneda: "BRL", tasaCompra: 71.8, tasaVenta: 75.8 },
+    { moneda: "CLP", tasaCompra: 0.41, tasaVenta: 0.61 },
 ];
 
 const ul = document.getElementById("tasasDeCambio");
