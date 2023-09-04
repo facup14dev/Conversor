@@ -57,7 +57,7 @@ const tasasDeCambio = [
 const ul = document.getElementById("tasasDeCambio");
 const filtroInput = document.getElementById("filtro");
 
-//Agrego el array al listado
+//Agrego el array al listado del front
 function mostrarTasasDeCambio(filtro) {
     ul.innerHTML = "";
 
@@ -75,22 +75,18 @@ function mostrarTasasDeCambio(filtro) {
 filtroInput.addEventListener("input", () => {
     mostrarTasasDeCambio(filtroInput.value);
 });
-
 //Reseteo el filtro cada vez que cargue la pág
 mostrarTasasDeCambio("");
 
 
-
-// Obtener la fecha actual
 const fechaActual = new Date()
 
 const dia = fechaActual.getDate()
-const mes = String(fechaActual.getMonth() + 1).padStart(2, "0");
+const mes = String(fechaActual.getMonth() + 1).padStart(2, "0"); //hago ésto para agregarle el 0 adelante del month
 const año = fechaActual.getFullYear()
 
 // Formatear la fecha como "dd/mm/yyyy"
 const fechaFormateada = `${dia}/${mes}/${año}`;
-
 
 const elementoFecha = document.getElementById("fecha");
 elementoFecha.textContent = `Valores tomados a la fecha: ${fechaFormateada}`;
