@@ -60,6 +60,7 @@ form p {
 
 input[type="radio"] {
   cursor: pointer;
+  accent-color: rgb(74, 119, 77);
 }
 
 input[type="number"] {

@@ -24,7 +24,7 @@
             <input type="radio" name="cambio" id="tres">Real ( R$ )
             <input type="radio" name="cambio" id="cuatro">Peso Chileno ( $ )
             <p>Ingresar monto en pesos argentinos a convertir </p>
-            <input type="number" id="valor" min="1" max="999999999" placeholder="$">
+            <input type="number" id="valor" min="1" max="999999999" placeholder="$" required>
             <input type="button" class="boton boton-secundario" id="convertor" value="Convertir" onclick="cotizar()">
         </form>
 
@@ -40,6 +40,6 @@
         <p id="fecha"></p>
     </main>
 
-    <script src="/js/script.js" async></script>
+    <script src="/js/script.js" defer></script>
 </body>
 </html>

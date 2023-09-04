@@ -1,11 +1,11 @@
 function cotizar() {
 
-    let valore = parseInt(document.getElementById("valor").value);
-    let resultado = 0;
-    let dolar = 730;
-    let euro = 770;
-    let real = 71.88
-    let chileno = 2.44
+    const valore = parseInt(document.getElementById("valor").value),
+          resultado = 0,
+          dolar = 730,
+          euro = 770,
+          real = 71.88,
+          chileno = 2.44;
 
     if (valore == 0) {
         alert("No puedes convertir ese valor.")
@@ -94,3 +94,14 @@ const fechaFormateada = `${dia}/${mes}/${año}`;
 
 const elementoFecha = document.getElementById("fecha");
 elementoFecha.textContent = `Valores tomados a la fecha: ${fechaFormateada}`;
+
+
+
+
+
+
+
+
+
+
+localStorage.setItem("bienvenido", 'Bienvenidos a Coder');
