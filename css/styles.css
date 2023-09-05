@@ -11,9 +11,9 @@ body {
   justify-content: center;
   min-height: 100vh;
   margin: 0;
-  background-color:rgb(74, 119, 77) ;
-  font-size: 20px;
+  background-color: #e8e8e8 ;
 }
+
 
 .text{
   font-size: 70px;
@@ -37,14 +37,26 @@ animation: typewriter 3s steps(15) 1s 1 both;
 
 main {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center; 
   align-items: center;
+}
+
+.container {
   justify-content: center;
-  padding: 30px 50px;
+  text-align: center;
+  height: 700px;
+  padding: 10px 25px;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.1);
   background-color: whitesmoke;
+  margin: 10px;
+}
+
+.container:first-child, .container:nth-child(3) {
+  height: 400px;
+  width: 300px;
 }
 
 form {
@@ -61,32 +73,77 @@ form p {
 input[type="radio"] {
   cursor: pointer;
   accent-color: rgb(74, 119, 77);
+  font-size: 55px;
 }
 
-input[type="number"] {
-  width: 70%;
-  height: 25px;
-  text-align: center;
+strong {
   font-size: 20px;
 }
 
-input[type="button"] {
-  width: 40%;
-  background-color:rgb(74, 119, 77);
-  color: white;
-  box-shadow: 5px 5px 6px white;
-  font-size: 15px;
-  padding: 10px 20px;
+ input[type="number"] {
+  width: 70%;
+  height: 25px;
+  padding: 10px 40px 10px 10px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   margin: 5px;
-  font-weight: bold;
+  font-size: 26px;
+  outline: none;
+  text-align: center;
 }
+
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.boton-convertir {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: rgb(74, 119, 77);
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+hr {
+  background-color: black;
+  height: 1px;
+  width: 100%;
+}
+
+.boton-convertir:hover {
+  background-color: #fff;
+  color: rgb(74, 119, 77);
+  border: 2px solid rgb(74, 119, 77);
+  box-shadow: 5px 5px 0px rgb(74, 119, 77);
+}
+
+.boton-convertir:active {
+  box-shadow: none;
+  transform: translateY(4px);
+}
+
 
 input[type="radio"], input[type="number"], input[type="button"] {
   margin: 5px;
 }
+
+.card {
+  width: 100%;
+  height: 254px;
+  border-radius: 10px;
+  background: #e0e0e0;
+ }
 
 ul {
     list-style-type: none;
@@ -117,3 +174,4 @@ li {
   font-size: 15px;
   margin-bottom: 0;
 }
+

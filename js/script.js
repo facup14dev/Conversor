@@ -1,31 +1,31 @@
 function cotizar() {
 
-    const valore = parseInt(document.getElementById("valor").value),
-          resultado = 0,
-          dolar = 730,
-          euro = 770,
-          real = 71.88,
-          chileno = 2.44;
+    const valorConvertir = parseInt(document.getElementById("valor").value);
+    let resultado = 0;
+    let dolar = 730;
+    let euro = 770;
+    let real = 71.88
+    let chileno = 2.44
 
-    if (valore == 0) {
+    if (valorConvertir == 0) {
         alert("No puedes convertir ese valor.")
         return;
     }
 
     if (document.getElementById("uno").checked ){
-        resultado = valore / dolar;
+        resultado = valorConvertir / dolar;
         alert("El cambio de pesos argentinos a dolares es: u$d " + resultado.toFixed(2))
     }
     else if (document.getElementById("dos").checked) {
-        resultado = valore / euro;
+        resultado = valorConvertir / euro;
         alert("El cambio de pesos argentinos a euros es: E$ " + resultado.toFixed(2))
     }
     else if (document.getElementById("tres").checked) {
-        resultado = valore / real;
+        resultado = valorConvertir / real;
         alert("El cambio de pesos argentinos a reales es R$ " + resultado.toFixed(2))
     }
     else if (document.getElementById("cuatro").checked) {
-        resultado = valore * chileno; //multiplico porque la moneda chilena es inferior a la argentina a diferencia de las otras.
+        resultado = valorConvertir * chileno; //multiplico porque la moneda chilena es inferior a la argentina a diferencia de las otras.
         alert("El cambio de pesos argentinos a chilenos es $ " + resultado.toFixed(2))
     }
     else {
@@ -46,12 +46,12 @@ boton.addEventListener('click', () => {
 });
 
 
-//Array de las monedas
+//Array de objetos de las monedas
 const tasasDeCambio = [
     { moneda: "USD", tasaCompra: 715, tasaVenta: 725 },
     { moneda: "EUR", tasaCompra: 788, tasaVenta: 799 },
-    { moneda: "BRL", tasaCompra: 71.88, tasaVenta: 75.85 },
-    { moneda: "CLP", tasaCompra: 0.41, tasaVenta: 0.60 },
+    { moneda: "BRL", tasaCompra: 71.8, tasaVenta: 75.8 },
+    { moneda: "CLP", tasaCompra: 0.41, tasaVenta: 0.61 },
 ];
 
 const ul = document.getElementById("tasasDeCambio");
@@ -89,15 +89,4 @@ const año = fechaActual.getFullYear()
 const fechaFormateada = `${dia}/${mes}/${año}`;
 
 const elementoFecha = document.getElementById("fecha");
-elementoFecha.textContent = `Valores tomados a la fecha: ${fechaFormateada}`;
-
-
-
-
-
-
-
-
-
-
-localStorage.setItem("bienvenido", 'Bienvenidos a Coder');
+elementoFecha.textContent = `valorConvertirs tomados a la fecha: ${fechaFormateada}`;
