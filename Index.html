@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 
     <meta charset="UTF-8">
@@ -53,21 +53,24 @@
         <div class="container historial">
                 <div id="historial">
                     <h2>Historial de Conversiones</h2>
-                    <table>
+                    <table id="tabla">
                         <thead>
                             <tr>
-                                <th>Fecha</th>
+                                <th>Fecha/Hora</th>
                                 <th>Monto</th>
                                 <th>Resultado</th>
                             </tr>
+                            <hr>
                         </thead>
                         <tbody id="historialTabla">
-                            <!-- Aquí se generará el contenido del historial -->
                         </tbody>
                     </table>
-                    <button onclick="borrarHistorial()">Borrar Historial</button>
+
+
                 </div>
             <hr>
+            <button class="boton-historial" id="borrarHistorial">Borrar Historial</button>
+
         </div>
 
 
