@@ -13,27 +13,48 @@ function cotizar() {
     }
 
     if (document.getElementById("uno").checked ){
+
         resultado = valorConvertir / dolar;
-        alert("El cambio de pesos argentinos a dolares es: u$d " + resultado.toFixed(2))
+        mostrarResultado("El cambio de pesos argentinos a dolares es u$d " + resultado.toFixed(2))
+
         guardarConversion(valorConvertir, "ARS", "U$D", resultado);
     }
     else if (document.getElementById("dos").checked) {
+
         resultado = valorConvertir / euro;
-        alert("El cambio de pesos argentinos a euros es: E$ " + resultado.toFixed(2))
+        mostrarResultado("El cambio de pesos argentinos a euros es € " + resultado.toFixed(2))
+
         guardarConversion(valorConvertir, "ARS", "€", resultado);
     }
     else if (document.getElementById("tres").checked) {
+
         resultado = valorConvertir / real;
-        alert("El cambio de pesos argentinos a reales es R$ " + resultado.toFixed(2))
+        mostrarResultado("El cambio de pesos argentinos a reales es R$ " + resultado.toFixed(2))
+
         guardarConversion(valorConvertir, "ARS", "R$", resultado);
     }
     else if (document.getElementById("cuatro").checked) {
+
         resultado = valorConvertir * chileno; //multiplico porque la moneda chilena es inferior a la argentina a diferencia de las otras.
-        alert("El cambio de pesos argentinos a chilenos es $ " + resultado.toFixed(2))
+
+        mostrarResultado("El cambio de pesos argentinos a chilenos es $ " + resultado.toFixed(2))
         guardarConversion(valorConvertir, "ARS", "CHL", resultado);
     }
     else {
-        alert("Tienes que completar los campos para poder convertir")
+        mostrarResultado("Tienes que completar los campos para poder convertir")
+    }
+
+    function mostrarResultado(mensaje) {
+        const modal = document.getElementById("resultadoModal");
+        const modalBody = document.getElementById("modalBody");
+        const modalClose = document.getElementById("modalCerrar");
+    
+        modal.style.display = "flex";
+        modalBody.textContent = mensaje;
+    
+        modalClose.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
     }
 }
 
@@ -57,6 +78,11 @@ const tasasDeCambio = [
     { moneda: "BRL", tasaCompra: 71.8, tasaVenta: 75.8 },
     { moneda: "CLP", tasaCompra: 0.41, tasaVenta: 0.61 },
 ];
+const enJSON = JSON.stringify(tasasDeCambio);
+
+localStorage.setItem('tasasDeCambio', enJSON);
+ 
+
 
 const ul = document.getElementById("tasasDeCambio");
 const filtroInput = document.getElementById("filtro");
