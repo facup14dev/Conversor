@@ -1,3 +1,27 @@
+async function obtenerDatos() {
+    try {
+      // Realizar una solicitud GET a una API
+      const respuesta = await fetch('https://dolarapi.com/v1/dolares/blue');
+  
+      // Verificar si la solicitud fue exitosa (código de respuesta 200)
+      if (!respuesta.ok) {
+        throw new Error('La solicitud no pudo ser completada.');
+      }
+  
+      // Convertir la respuesta a formato JSON
+      const datos = await respuesta.json();
+  
+    } catch (error) {
+      // Capturar y manejar cualquier error que ocurra durante la solicitud
+      console.error('Error:', error.message);
+    } finally {
+      // Este bloque finally se ejecutará siempre, independientemente de si hubo éxito o error
+      console.log('La solicitud ha finalizado.');
+    }
+}
+  
+console.log(obtenerDatos());
+
 function cotizar() {
 
     const valorConvertir = parseInt(document.getElementById("valor").value);
@@ -7,54 +31,54 @@ function cotizar() {
     let real = 71.88
     let chileno = 2.44
 
-    if (valorConvertir == 0) {
-        alert("No puedes convertir ese valor.")
-        return;
+    if (isNaN(valorConvertir) ) {//Si no ingresa nada en el input arrojo error con sweetAlert
+        Swal.fire({
+            title: '<strong>Debes ingresar un valor para la conversion.</strong>',
+            icon: 'error',
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            cancelButtonText : 'OK',
+            showConfirmButton: false
+          })
+          return;
     }
 
     if (document.getElementById("uno").checked ){
 
         resultado = valorConvertir / dolar;
         mostrarResultado("El cambio de pesos argentinos a dolares es u$d " + resultado.toFixed(2))
-
         guardarConversion(valorConvertir, "ARS", "U$D", resultado);
-    }
-    else if (document.getElementById("dos").checked) {
+
+    } else if (document.getElementById("dos").checked) {
 
         resultado = valorConvertir / euro;
         mostrarResultado("El cambio de pesos argentinos a euros es € " + resultado.toFixed(2))
-
         guardarConversion(valorConvertir, "ARS", "€", resultado);
-    }
-    else if (document.getElementById("tres").checked) {
+
+    } else if (document.getElementById("tres").checked) {
 
         resultado = valorConvertir / real;
         mostrarResultado("El cambio de pesos argentinos a reales es R$ " + resultado.toFixed(2))
-
         guardarConversion(valorConvertir, "ARS", "R$", resultado);
-    }
-    else if (document.getElementById("cuatro").checked) {
+
+    } else if (document.getElementById("cuatro").checked) {
 
         resultado = valorConvertir * chileno; //multiplico porque la moneda chilena es inferior a la argentina a diferencia de las otras.
-
         mostrarResultado("El cambio de pesos argentinos a chilenos es $ " + resultado.toFixed(2))
         guardarConversion(valorConvertir, "ARS", "CHL", resultado);
-    }
-    else {
+
+    } else {
         mostrarResultado("Tienes que completar los campos para poder convertir")
     }
 
     function mostrarResultado(mensaje) {
-        const modal = document.getElementById("resultadoModal");
-        const modalBody = document.getElementById("modalBody");
-        const modalClose = document.getElementById("modalCerrar");
-    
-        modal.style.display = "flex";
-        modalBody.textContent = mensaje;
-    
-        modalClose.addEventListener("click", function() {
-            modal.style.display = "none";
-        });
+        Swal.fire({
+            title: '<strong>CONVERSION EXITOSA</strong>',
+            icon: 'success',
+            html: `<strong>${mensaje}</strong>` ,
+            showCloseButton: true,
+            confirmButtonColor: 'rgb(74, 119, 77)'
+          })
     }
 }
 
@@ -68,6 +92,7 @@ boton.addEventListener('click', () => {
 
     vecesPresionado++;
     contador.textContent = vecesPresionado;
+
 });
 
 
@@ -78,12 +103,11 @@ const tasasDeCambio = [
     { moneda: "BRL", tasaCompra: 71.8, tasaVenta: 75.8 },
     { moneda: "CLP", tasaCompra: 0.41, tasaVenta: 0.61 },
 ];
+
 const enJSON = JSON.stringify(tasasDeCambio);
 
 localStorage.setItem('tasasDeCambio', enJSON);
  
-
-
 const ul = document.getElementById("tasasDeCambio");
 const filtroInput = document.getElementById("filtro");
 
@@ -110,7 +134,6 @@ mostrarTasasDeCambio("");
 
 
 const fechaActual = new Date()
-
 const dia = fechaActual.getDate()
 const mes = String(fechaActual.getMonth() + 1).padStart(2, "0"); //hago ésto para agregarle el 0 adelante del month
 const año = fechaActual.getFullYear()
@@ -120,9 +143,6 @@ const fechaFormateada = `${dia}/${mes}/${año}`;
 
 const elementoFecha = document.getElementById("fecha");
 elementoFecha.textContent = `Valores tomados a la fecha: ${fechaFormateada}`;
-
-
-
 
 //GUARDO LA CONVERSION EN EL LOCALSTORAGE CADA VEZ QUE REALICE UNA CONVERSION
 function guardarConversion(monto, monedaOrigen, monedaDestino, resultado) {
@@ -168,5 +188,3 @@ function borrarHistorial() {
 const botonBorrarHistorial = document.getElementById('borrarHistorial');
 
 botonBorrarHistorial.addEventListener('click', borrarHistorial);
-
-
