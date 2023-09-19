@@ -67,7 +67,8 @@ form {
 }
 
 form p {
-  margin-bottom: 15px;
+  margin: 50px 0px 0px 0px;
+  font-size: 21px;
 }
 
 input[type="radio"] {
@@ -84,7 +85,7 @@ strong {
   width: 70%;
   height: 25px;
   padding: 10px 40px 10px 10px;
-  border: none;
+  border: 2px solid rgb(74, 119, 77);
   border-radius: 5px;
   margin: 5px;
   font-size: 26px;
@@ -101,6 +102,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .boton-convertir {
   display: inline-block;
+  margin: 20px;
   padding: 10px 20px;
   font-size: 24px;
   font-weight: bold;
@@ -134,7 +136,7 @@ hr {
 }
 
 
-input[type="radio"], input[type="number"], input[type="button"] {
+input[type="radio"], input[type="number"] {
   margin: 5px;
 }
 
@@ -150,7 +152,8 @@ li {
 
 #filtro {
   padding: 10px 40px 10px 10px;
-  border: none;
+  border: 1px solid rgb(74, 119, 77);
+  text-align: center;
   border-radius: 5px;
   margin: 5px;
   font-size: 16px;
@@ -183,8 +186,8 @@ li {
 
 .boton-historial {
   display: inline-block;
-  padding: 5px 10px;
-  font-size: 12px;
+  padding: 7.5px 10px;
+  font-size: 15px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;

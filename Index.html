@@ -7,8 +7,8 @@
 
     <title>Conversor de Divisas</title>
 
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="shortcut icon" href="/images/aaa.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./CSS/styles.css">
+    <link rel="shortcut icon" href="./images/aaa.ico" type="image/x-icon">
 
 </head>
 
@@ -17,6 +17,7 @@
     <h1 class="text animation">Conversor de Divisas</h1>
 
     <main>
+        
         <div class="container monedas">
 
             <h2>Tasas de Cambio</h1>
@@ -30,12 +31,17 @@
         <div class="container conversor">
 
             <form action="">
+
                 <h1>Seleccionar moneda a convertir</h3>
 
-                <input type="radio" name="cambio" id="uno" checked><strong>Dolar ( U$D )</strong>
-                <input type="radio" name="cambio" id="dos"><strong>Euro ( € )</strong>
-                <input type="radio" name="cambio" id="tres"><strong>Real ( R$ )</strong>
-                <input type="radio" name="cambio" id="cuatro"><strong>Peso Chileno ( $ )</strong>
+                <input type="radio" name="cambio" id="uno" checked><strong>Dolar</strong>
+                <input type="radio" name="cambio" id="dos"><strong>Euro </strong>
+                <input type="radio" name="cambio" id="tres"><strong>Real </strong>
+                <input type="radio" name="cambio" id="cuatro"><strong>Peso Chileno</strong>
+                <input type="radio" name="cambio" id="cinco"><strong>Peso Uruguayo</strong>
+                <input type="radio" name="cambio" id="seis"><strong>Peso Boliviano</strong>
+                
+                
 
                 <p>Ingresar monto en pesos argentinos a convertir </p>
 
@@ -44,24 +50,24 @@
 
             </form>
 
-            <hr>
-
         </div>
 
         <div class="container historial">
+
                 <div id="historial">
+
                     <h2>Historial de Conversiones</h2>
+
                     <table id="tabla">
                         <thead>
                             <tr>
-                                <th>Fecha/Hora</th>
+                                <th>Fecha y Hora</th>
                                 <th>Monto</th>
                                 <th>Resultado</th>
                             </tr>
                             <hr>
                         </thead>
-                        <tbody id="historialTabla">
-                        </tbody>
+                        <tbody id="historialTabla"></tbody>
                     </table>
 
 
@@ -79,7 +85,7 @@
         <small id="fecha"></small>
     </footer>
 
-<script src="/js/script.js" defer></script>
+<script src="./JS/script.js" async></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>

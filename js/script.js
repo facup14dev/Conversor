@@ -1,85 +1,108 @@
 async function obtenerDatos() {
     try {
-      // Realizar una solicitud GET a una API
-      const respuesta = await fetch('https://dolarapi.com/v1/dolares/blue');
+
+        const respuesta = await fetch('https://dolarapi.com/v1/dolares/blue');
+        
+        if (!respuesta.ok) {
+          throw new Error('La solicitud no pudo ser completada.');
+        }
   
-      // Verificar si la solicitud fue exitosa (código de respuesta 200)
-      if (!respuesta.ok) {
-        throw new Error('La solicitud no pudo ser completada.');
-      }
-  
-      // Convertir la respuesta a formato JSON
-      const datos = await respuesta.json();
-  
-    } catch (error) {
-      // Capturar y manejar cualquier error que ocurra durante la solicitud
+        const datos = await respuesta.json();  
+        return datos;
+
+    }
+    catch (error) {
       console.error('Error:', error.message);
-    } finally {
-      // Este bloque finally se ejecutará siempre, independientemente de si hubo éxito o error
+    } 
+    finally {
       console.log('La solicitud ha finalizado.');
     }
 }
   
-console.log(obtenerDatos());
 
-function cotizar() {
+async function cotizar() {
 
-    const valorConvertir = parseInt(document.getElementById("valor").value);
-    let resultado = 0;
-    let dolar = 730;
-    let euro = 770;
-    let real = 71.88
-    let chileno = 2.44
+    try { 
 
-    if (isNaN(valorConvertir) ) {//Si no ingresa nada en el input arrojo error con sweetAlert
-        Swal.fire({
-            title: '<strong>Debes ingresar un valor para la conversion.</strong>',
-            icon: 'error',
-            showCancelButton: true,
-            cancelButtonColor: '#d33',
-            cancelButtonText : 'OK',
-            showConfirmButton: false
-          })
-          return;
+        const datosAPI = await obtenerDatos();
+        
+        const valorConvertir = parseInt(document.getElementById("valor").value);
+        let resultado = 0;
+        
+        const dolar = datosAPI.venta;
+        let euro = 770;
+        let real = 71.88
+        let chileno = 2.44
+        let uruguayo = 0.10
+        let boliviano = 0.01
+        
+        
+        if (isNaN(valorConvertir) ) {//Si no ingresa nada en el input arrojo error con sweetAlert
+            Swal.fire({
+                title: '<strong>Debes ingresar un valor para la conversion.</strong>',
+                icon: 'error',
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                cancelButtonText : 'OK',
+                showConfirmButton: false
+              })
+              return;
+        }
+    
+        if (document.getElementById("uno").checked ){
+        
+            resultado = valorConvertir / dolar;
+            mostrarResultado("El cambio de $ " + valorConvertir + " pesos argentinos a dolares es u$d " + resultado.toFixed(2))
+            guardarConversion(valorConvertir, "ARS", "U$D", resultado);
+        
+        } else if (document.getElementById("dos").checked) {
+        
+            resultado = valorConvertir / euro;
+            mostrarResultado("El cambio de $ " + valorConvertir + " pesos argentinos a euros es € " + resultado.toFixed(2))
+            guardarConversion(valorConvertir, "ARS", "€", resultado);
+        
+        } else if (document.getElementById("tres").checked) {
+        
+            resultado = valorConvertir / real;
+            mostrarResultado("El cambio de $ " + valorConvertir + " pesos argentinos a reales es R$ " + resultado.toFixed(2))
+            guardarConversion(valorConvertir, "ARS", "R$", resultado);
+        
+        } else if (document.getElementById("cuatro").checked) {
+        
+            resultado = valorConvertir * chileno; //multiplico porque la moneda chilena es inferior a la argentina a diferencia de las otras.
+            mostrarResultado("El cambio de $ " + valorConvertir + " pesos argentinoss a pesos chilenos es $" + resultado.toFixed(2))
+            guardarConversion(valorConvertir, "ARS", "CHL", resultado);
+        
+        } else if (document.getElementById("cinco").checked) {
+        
+            resultado = valorConvertir / uruguayo; 
+            mostrarResultado("El cambio de $ " + valorConvertir + " pesos argentinoss a pesos uruguayos es $U " + resultado.toFixed(2))
+            guardarConversion(valorConvertir, "ARS", "UYU", resultado);
+        
+        } else if (document.getElementById("seis").checked) {
+        
+            resultado = valorConvertir / boliviano;
+            mostrarResultado("El cambio de $ " + valorConvertir + " pesos argentinos a pesos bolivianos es $b " + resultado.toFixed(2))
+            guardarConversion(valorConvertir, "ARS", "BOB", resultado);
+        
+        } else {
+            mostrarResultado("Tienes que completar los campos para poder convertir")
+        }
+
+    } catch (error) {
+        console.error('Error:', error.message);
     }
 
-    if (document.getElementById("uno").checked ){
+}
 
-        resultado = valorConvertir / dolar;
-        mostrarResultado("El cambio de pesos argentinos a dolares es u$d " + resultado.toFixed(2))
-        guardarConversion(valorConvertir, "ARS", "U$D", resultado);
-
-    } else if (document.getElementById("dos").checked) {
-
-        resultado = valorConvertir / euro;
-        mostrarResultado("El cambio de pesos argentinos a euros es € " + resultado.toFixed(2))
-        guardarConversion(valorConvertir, "ARS", "€", resultado);
-
-    } else if (document.getElementById("tres").checked) {
-
-        resultado = valorConvertir / real;
-        mostrarResultado("El cambio de pesos argentinos a reales es R$ " + resultado.toFixed(2))
-        guardarConversion(valorConvertir, "ARS", "R$", resultado);
-
-    } else if (document.getElementById("cuatro").checked) {
-
-        resultado = valorConvertir * chileno; //multiplico porque la moneda chilena es inferior a la argentina a diferencia de las otras.
-        mostrarResultado("El cambio de pesos argentinos a chilenos es $ " + resultado.toFixed(2))
-        guardarConversion(valorConvertir, "ARS", "CHL", resultado);
-
-    } else {
-        mostrarResultado("Tienes que completar los campos para poder convertir")
-    }
-
-    function mostrarResultado(mensaje) {
-        Swal.fire({
-            title: '<strong>CONVERSION EXITOSA</strong>',
-            icon: 'success',
-            html: `<strong>${mensaje}</strong>` ,
-            showCloseButton: true,
-            confirmButtonColor: 'rgb(74, 119, 77)'
-          })
-    }
+function mostrarResultado(mensaje) {
+    Swal.fire({
+        title: '<strong>CONVERSION EXITOSA</strong>',
+        icon: 'success',
+        html: `<strong>${mensaje}</strong>` ,
+        showCloseButton: true,
+        confirmButtonColor: 'rgb(74, 119, 77)'
+      })
 }
 
 //Contador de veces covertido
@@ -98,10 +121,12 @@ boton.addEventListener('click', () => {
 
 //Array de objetos de las monedas
 const tasasDeCambio = [
-    { moneda: "USD", tasaCompra: 715, tasaVenta: 725 },
+    { moneda: "USD", tasaCompra: 740, tasaVenta: 725 },
     { moneda: "EUR", tasaCompra: 788, tasaVenta: 799 },
     { moneda: "BRL", tasaCompra: 71.8, tasaVenta: 75.8 },
     { moneda: "CLP", tasaCompra: 0.41, tasaVenta: 0.61 },
+    { moneda: "UYU", tasaCompra: 0.11, tasaVenta: 0.34 },
+    { moneda: "BOB", tasaCompra: 0.01, tasaVenta: 0.07 },
 ];
 
 const enJSON = JSON.stringify(tasasDeCambio);
