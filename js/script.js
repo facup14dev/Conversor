@@ -1,4 +1,5 @@
-async function obtenerDatos() {
+//API
+async function datosApi() {
     try {
 
         const respuesta = await fetch('https://dolarapi.com/v1/dolares/blue');
@@ -10,21 +11,23 @@ async function obtenerDatos() {
         const datos = await respuesta.json();  
         return datos;
 
-    }
-    catch (error) {
+    } catch (error) {
+
       console.error('Error:', error.message);
-    } 
-    finally {
+
+    } finally {
+
       console.log('La solicitud ha finalizado.');
+      
     }
 }
   
-
+//FUNC PRINCIPAL
 async function cotizar() {
 
     try { 
 
-        const datosAPI = await obtenerDatos();
+        const datosAPI = await datosApi();
         
         const valorConvertir = parseInt(document.getElementById("valor").value);
         let resultado = 0;
@@ -39,7 +42,7 @@ async function cotizar() {
         
         if (isNaN(valorConvertir) ) {//Si no ingresa nada en el input arrojo error con sweetAlert
             Swal.fire({
-                title: '<strong>Debes ingresar un valor para la conversion.</strong>',
+                title: '<strong>Debes ingresar un valor numerico para la conversion.</strong>',
                 icon: 'error',
                 showCancelButton: true,
                 cancelButtonColor: '#d33',
@@ -91,7 +94,11 @@ async function cotizar() {
 
     } catch (error) {
         console.error('Error:', error.message);
-    }
+    } finally {
+
+    console.log('La solicitud ha finalizado.');
+    
+  }
 
 }
 
@@ -169,7 +176,10 @@ const fechaFormateada = `${dia}/${mes}/${año}`;
 const elementoFecha = document.getElementById("fecha");
 elementoFecha.textContent = `Valores tomados a la fecha: ${fechaFormateada}`;
 
-//GUARDO LA CONVERSION EN EL LOCALSTORAGE CADA VEZ QUE REALICE UNA CONVERSION
+//GUARDO LA CONVERSION EN EL LOCALSTORAGE CADA VEZ QUE REALICE UNA CONVERSION ->funcion cotizar()
+
+const historial = JSON.parse(localStorage.getItem('historial')) || [];
+
 function guardarConversion(monto, monedaOrigen, monedaDestino, resultado) {
     const conversion = {
         fecha: new Date().toLocaleString(),
@@ -179,20 +189,22 @@ function guardarConversion(monto, monedaOrigen, monedaDestino, resultado) {
         resultado: resultado.toFixed(2),
     };
 
-    const historial = JSON.parse(localStorage.getItem('historial')) || [];
-
     historial.push(conversion);
 
     localStorage.setItem('historial', JSON.stringify(historial));
 
-    actualizarTablaHistorial(historial);
+    actualizarTablaHistorial(historial);//actualizo la tabla del historial
 }
 
 function actualizarTablaHistorial(historial) {
+
     const historialTabla = document.getElementById('historialTabla');
     historialTabla.innerHTML = '';
 
-    historial.forEach(conversion => {
+    const inicioI = (paginaActual - 1) * elementosPorPagina;
+    const finalI = inicioI + elementosPorPagina;
+
+    historial.slice(inicioI, finalI).forEach(conversion => {
         const fila = document.createElement('tr');
         fila.innerHTML = `
             <td>${conversion.fecha}</td>
@@ -203,13 +215,74 @@ function actualizarTablaHistorial(historial) {
     });
 }
 
+const botonBorrarHistorial = document.getElementById('borrarHistorial');
+
+botonBorrarHistorial.addEventListener('click', borrarHistorial);
+
+//Paginación
+const elementosPorPagina = 5;
+let paginaActual = 1;
+
+const paginaSiguiente = document.getElementById('paginaSiguiente');
+const paginaAnterior = document.getElementById('paginaAnterior');
+
+paginaSiguiente.addEventListener('click', () => {
+
+    const totalPages = Math.ceil(historial.length / elementosPorPagina); //con math.floor no me funcionaba porque redondea hacia abajo.
+
+    if (paginaActual < totalPages) {
+        paginaActual++;
+        actualizarTablaHistorial(historial);
+        actualizarIndicadorPagina();
+    }
+});
+
+paginaAnterior.addEventListener('click', () => {
+
+    if (paginaActual > 1) {
+        paginaActual--;
+
+        actualizarTablaHistorial(historial);
+        actualizarIndicadorPagina();
+    }
+});
+
+//cargo los datos segun la página
+function mostrarElementosEnPagina(pagina, historial) {
+
+    const historialTabla = document.getElementById('historialTabla');
+    historialTabla.innerHTML = '';
+
+    const inicioI = (pagina - 1) * elementosPorPagina;
+    const finalI = inicioI + elementosPorPagina;
+    
+    for (let i = inicioI; i < finalI && i < historial.length; i++) {
+        const conversion = historial[i];
+        const fila = document.createElement('tr');
+
+        fila.innerHTML = `
+            <td>${conversion.fecha}</td>
+            <td>${conversion.montoConvertido} ${conversion.monedaOrigen}</td>
+            <td>${conversion.resultado} ${conversion.monedaDestino}</td>
+        `;
+
+        historialTabla.appendChild(fila);
+    }
+}
+
+//actualizo el número de página.
+function actualizarIndicadorPagina() {
+    const paginaActualElement = document.getElementById('paginaActual');
+
+    paginaActualElement.textContent = `${paginaActual}`;
+}
+
+mostrarElementosEnPagina(paginaActual, historial);
+actualizarIndicadorPagina();
+
 
 //BORRAR HISTORIAL
 function borrarHistorial() {
     localStorage.removeItem('historial');
     actualizarTablaHistorial([]);
 }
-
-const botonBorrarHistorial = document.getElementById('borrarHistorial');
-
-botonBorrarHistorial.addEventListener('click', borrarHistorial);

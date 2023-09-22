@@ -45,7 +45,7 @@ main {
 .container {
   justify-content: center;
   text-align: center;
-  height: 700px;
+  height: 600px;
   padding: 10px 25px;
   border: 1px solid #ccc;
   border-radius: 20px;
@@ -172,6 +172,7 @@ li {
 }
 
 
+
 #tabla {
   border-collapse: separate;
   border-spacing: 10px; 
@@ -184,9 +185,28 @@ li {
   vertical-align: middle;
 }
 
+.controles {
+  margin-top: 250px;
+}
+
+#paginaAnterior, #paginaSiguiente {
+  background-color: transparent;
+  border-radius: 7.5px;
+  border: 1px solid black;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.boton-historial{
+  position: absolute;
+  left: 1450px;
+  top: 700px;
+}
+
 .boton-historial {
   display: inline-block;
   padding: 7.5px 10px;
+  margin-top: 15px;
   font-size: 15px;
   font-weight: bold;
   text-align: center;
@@ -201,3 +221,37 @@ li {
 
 
 
+
+@media (min-width: 1600px) and (max-width: 1800px) {
+
+  body {
+    background-color: red;
+  }
+
+  .container {
+    height: 620px;
+  }
+
+  .boton-historial{
+    left: 1320px;
+    top: 640px;
+  }
+
+}
+
+@media (min-width: 1300px) and (max-width: 1627px) {
+
+  body {
+    background-color: yellow;
+  }
+
+  .container {
+    height: 660px;
+  }
+
+  .boton-historial{
+    left: 1265px;
+    top: 655px;
+  }
+
+}
